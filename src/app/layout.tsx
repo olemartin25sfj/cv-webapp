@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import LanguageSwitcher from "@/components/LanguageSwitcher"; // husk å lage denne komponenten
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import ParticleBackground from "@/components/ParticleBackground";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,10 +27,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-emerald-950 min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex flex-col min-h-screen">
-          <header className="p-4 border-b border-emerald-800 flex justify-end">
+        <ParticleBackground />
+        <div className="min-h-screen bg-gradient-animate text-white">
+          <header className="p-4 border-b border-white/20 flex justify-end">
             <LanguageSwitcher />
           </header>
           <div className="flex-grow">{children}</div>

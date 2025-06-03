@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 :root {
-  /* Du kan beholde disse hvis du senere vil bruke variablene aktivt */
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -13,8 +12,27 @@
   }
 }
 
+/* ✨ Animasjon for bakgrunnen */
+@keyframes gradient-bg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Klasse som brukes i layout.tsx */
+.bg-gradient-animate {
+  background: linear-gradient(270deg, #0f766e, #1e3a8a, #9333ea);
+  background-size: 600% 600%;
+  animation: gradient-bg 20s ease infinite;
+}
+
 body {
-  /* Fjern bakgrunnsfarge her for å la Tailwind styre via className */
   @apply antialiased;
   font-family: var(--font-geist-sans), Arial, sans-serif;
 }
