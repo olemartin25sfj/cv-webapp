@@ -8,7 +8,7 @@ export default function Portrait() {
         alt="Portrett av meg"
         width={200}
         height={200}
-        className="rounded-full shadow-md mx-auto"
+        className="rounded-xl shadow-md mx-auto"
         priority
       />
     </div>

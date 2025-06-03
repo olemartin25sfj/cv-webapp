@@ -26,12 +26,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-emerald-900 min-h-screen`}
       >
-        <header className="p-4 border-b flex justify-end">
-          <LanguageSwitcher />
-        </header>
-        <main>{children}</main>
+        <div className="flex flex-col min-h-screen">
+          <header className="p-4 border-b border-emerald-800 flex justify-end">
+            <LanguageSwitcher />
+          </header>
+          <div className="flex-grow">{children}</div>
+        </div>
       </body>
     </html>
   );

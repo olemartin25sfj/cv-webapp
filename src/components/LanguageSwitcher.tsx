@@ -20,7 +20,7 @@ export default function LanguageSwitcher() {
   return (
     <button
       onClick={switchLanguage}
-      className="px-3 py-1 border rounded hover:bg-gray-200"
+      className="px-3 py-1 border rounded hover:bg-emerald-900"
       aria-label="Switch language"
     >
       {currentLang === "en" ? "Norsk" : "English"}
