@@ -8,7 +8,7 @@ export default function MainContentWrapper({
   return (
     <main
       role="main"
-      className="bg-emerald-800 text-white p-4 sm:p-8 rounded-xl shadow-lg max-w-3xl mx-auto mt-12"
+      className="bg-gradient-to-b from-emerald-900 to-emerald-700 text-white p-4 sm:p-8 rounded-xl shadow-lg max-w-3xl mx-auto mt-12"
     >
       {children}
     </main>
