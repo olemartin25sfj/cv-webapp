@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, usePathname } from "next/navigation";
+import GlassButton from "./GlassButton";
 
 export default function LanguageSwitcher() {
   const router = useRouter();
@@ -18,12 +19,8 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <button
-      onClick={switchLanguage}
-      className="px-3 py-1 border rounded hover:bg-emerald-950"
-      aria-label="Switch language"
-    >
+    <GlassButton onClick={switchLanguage} aria-label="Switch language">
       {currentLang === "en" ? "Norsk" : "English"}
-    </button>
+    </GlassButton>
   );
 }

@@ -29,12 +29,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ParticleBackground />
-        <div className="min-h-screen bg-gradient-animate text-white">
-          <header className="p-4 border-b border-white/20 flex justify-end">
+        <div className="relative min-h-screen overflow-hidden">
+          {/* Bakgrunnsgradient */}
+          <div className="fixed inset-0 -z-20 bg-gradient-to-b from-emerald-950 to-emerald-900" />
+
+          {/* Partikkel-bakgrunn */}
+          <ParticleBackground />
+
+          {/* Innhold */}
+          <header className="p-4 border-b border-white/20 flex justify-end relative z-10">
             <LanguageSwitcher />
           </header>
-          <div className="flex-grow">{children}</div>
+          <main className="relative z-10">{children}</main>
         </div>
       </body>
     </html>
