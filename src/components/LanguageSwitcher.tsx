@@ -1,26 +1,23 @@
 "use client";
 
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next-intl/client";
+import { useLocale } from "next-intl";
 import GlassButton from "./GlassButton";
 
 export default function LanguageSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
+  const locale = useLocale();
 
-  // Enkel språkdeteksjon i URL (f.eks. /en eller /no)
-  const currentLang = pathname.startsWith("/en") ? "en" : "no";
+  const newLocale = locale === "en" ? "no" : "en";
 
   const switchLanguage = () => {
-    if (currentLang === "en") {
-      router.push(pathname.replace(/^\/en/, "") || "/");
-    } else {
-      router.push("/en" + pathname);
-    }
+    router.push(pathname, { locale: newLocale });
   };
 
   return (
     <GlassButton onClick={switchLanguage} aria-label="Switch language">
-      {currentLang === "en" ? "Norsk" : "English"}
+      {locale === "en" ? "Norsk" : "English"}
     </GlassButton>
   );
 }
