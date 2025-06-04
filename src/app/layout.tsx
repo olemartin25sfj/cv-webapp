@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 import ParticleBackground from "@/components/ParticleBackground";
+import Navbar from "@/components/NavBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased text-yellow-50`}
       >
         <div className="relative min-h-screen overflow-hidden">
           {/* Bakgrunnsgradient */}
@@ -35,11 +35,10 @@ export default function RootLayout({
 
           {/* Partikkel-bakgrunn */}
           <ParticleBackground />
+          <Navbar />
 
           {/* Innhold */}
-          <header className="p-4 border-b border-white/20 flex justify-end relative z-10">
-            <LanguageSwitcher />
-          </header>
+          <header className="p-4 border-b border-white/20 flex justify-end relative z-10"></header>
           <main className="relative z-10">{children}</main>
         </div>
       </body>
