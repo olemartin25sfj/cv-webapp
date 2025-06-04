@@ -4,16 +4,16 @@ export default function ProfileIntro({ lang }: { lang: "no" | "en" }) {
       {lang === "no" ? (
         <>
           <h2 className="text-2xl font-semibold mb-2">
-            Hei, jeg er [insert name]
+            Hei, jeg er Ole Martin
           </h2>
-          <p>Paragraf bla bla bla bla...</p>
+          <p>Developer in the making...</p>
         </>
       ) : (
         <>
           <h2 className="text-2xl font-semibold mb-2">
-            Hi, I&apos;m [insert name]
+            Hi, I&apos;m Ole Martin
           </h2>
-          <p>paragraph bla bla bla bla...</p>
+          <p>Developer in the making...</p>
         </>
       )}
     </section>

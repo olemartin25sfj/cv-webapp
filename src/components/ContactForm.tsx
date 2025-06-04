@@ -1,40 +1,54 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import GlassButton from "./GlassButton";
 
 export default function ContactForm() {
+  const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle"
   );
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  async function handleSubmit(event: React.FormEvent) {
+    event.preventDefault();
     setStatus("sending");
 
-    const formData = new FormData(e.currentTarget);
+    if (!formRef.current) return;
 
+    const formData = new FormData(formRef.current);
     formData.append("access_key", "162f73c9-2db7-4a4c-bc54-11b989d1d131");
 
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: json,
       });
 
-      if (res.ok) {
+      const result = await response.json();
+
+      if (result.success) {
+        console.log("Success:", result);
         setStatus("sent");
-        e.currentTarget.reset();
+        formRef.current.reset();
       } else {
-        throw new Error("Sending feilet");
+        console.error("Feil fra Web3Forms:", result.message);
+        setStatus("error");
       }
-    } catch {
+    } catch (error) {
+      console.error("Uventet feil:", error);
       setStatus("error");
     }
-  };
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
       <input
         type="text"
         name="name"
@@ -57,16 +71,41 @@ export default function ContactForm() {
       />
       <GlassButton
         type="submit"
-        className="bg-blue-600 text-white px-4 py-2 rounded"
+        disabled={status === "sending"}
+        className="text-white disabled:opacity-50 flex items-center gap-2"
       >
-        Send
+        {status === "sending" ? (
+          <>
+            <svg
+              className="animate-spin h-4 w-4 text-white"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+              />
+            </svg>
+            Sender...
+          </>
+        ) : (
+          "Send melding"
+        )}
       </GlassButton>
 
       {status === "sent" && (
-        <p className="text-green-600">Takk! Meldingen ble sendt.</p>
+        <p className="text-green-600">✅ Meldingen ble sendt!</p>
       )}
       {status === "error" && (
-        <p className="text-red-600">Noe gikk galt. Prøv igjen senere.</p>
+        <p className="text-red-600">❌ Noe gikk galt. Prøv igjen senere.</p>
       )}
     </form>
   );
